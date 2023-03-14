@@ -38,6 +38,8 @@ public:
 	static UPROPERTY(Transient) UTDGameplayEventData* abilityData;
 	static UPROPERTY(Transient) ATDBase* baseRef;
 	static UPROPERTY(Transient) UTDWeightManager* weightManagerRef;
+	static UPROPERTY(Transient) ATDObjectPooler* objectPoolerRef;
+
 	static UPROPERTY(Transient) ATDGameMode* GameModeRef;
 
 
@@ -103,6 +105,12 @@ public:
     UFUNCTION()
         static void TDSetGameMode(ATDGameMode* _gameModeRef);
 
+
+	UFUNCTION()
+	static void TDSetObjectPooler(ATDObjectPooler* _objectPoolerRef);
+
+	UFUNCTION()
+	static ATDObjectPooler* TDGetObjectPooler();
 
 	//Debug
 	UFUNCTION(BlueprintCallable)

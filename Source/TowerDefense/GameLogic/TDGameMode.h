@@ -49,7 +49,8 @@ protected:
 
 
 private:
-
+    UPROPERTY(Transient)
+    ATDObjectPooler* objectPoolerRef = nullptr;
 
 public:
 

@@ -13,9 +13,11 @@ ATDObjectPooler* ATDObjectPooler::TDGetObjectPooler(TSubclassOf<ATDObjectPooler>
     if (OwnerPooler == nullptr)
     {
         UWorld* actualWorld = UTDGameData::TDGetWorld();
-        FActorSpawnParameters paramet;
-        //OwnerPooler = Cast<ATDObjectPooler>(actualWorld->SpawnActor(ATDObjectPooler::StaticClass()));
-        OwnerPooler = actualWorld->SpawnActor<ATDObjectPooler>(_classRef);
+        FActorSpawnParameters params;
+        params.ObjectFlags = EObjectFlags::RF_MarkAsRootSet;
+        OwnerPooler = actualWorld->SpawnActor<ATDObjectPooler>(_classRef,params);
+        OwnerPooler->AddToRoot();
+
     }
 
     return OwnerPooler;
@@ -38,6 +40,7 @@ ATDEnemy* ATDObjectPooler::TDGetEnemyFromPool()
 {
     if (!disabledEnemies.IsEmpty())
     {
+    
         ATDEnemy* enemyRef = disabledEnemies[0];
         disabledEnemies.RemoveAt(0);
         activeEnemies.Add(enemyRef);
@@ -64,6 +67,7 @@ ATDObjectPooler::ATDObjectPooler()
 
 ATDObjectPooler::~ATDObjectPooler()
 {
+
     OwnerPooler = nullptr;
 }
 
@@ -92,6 +96,11 @@ void ATDObjectPooler::BeginPlay()
 void ATDObjectPooler::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+
+//     bool cosa = IsRooted();
+//     FString y = cosa ? TEXT("true") : TEXT("false");
+//     GEngine->AddOnScreenDebugMessage(0, 0.f, FColor::Yellow, y);
 
 }
 

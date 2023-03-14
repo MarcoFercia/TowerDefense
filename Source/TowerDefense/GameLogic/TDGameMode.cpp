@@ -33,8 +33,6 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDGameData::TDSetWorld(world);
 
     UTDGameData::TDSetAbilityStruct(NewObject<UTDGameplayEventData>(UTDGameplayEventData::StaticClass()));
-    ATDObjectPooler* objectPooler = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
-
 
     ATDRoundManager::TDGetRoundManager(RoundManagerClass);
 
@@ -42,9 +40,7 @@ void ATDGameMode::InitGame(const FString& MapName, const FString& Options, FStri
     UTDWeightManager* weightManager = UTDWeightManager::TDGetWeightManager();
     UTDGameData::TDSetWeightManager(weightManager);
     weightManager->TDSetDataTable(statsDatatable);
-    //weightManager->TDStartSpawn(EnemyClass);
 
-    ATDRoundManager::TDGetRoundManager();
 }
 
 UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
@@ -55,6 +51,9 @@ UTDElement* ATDGameMode::TDGetDataAssetFromElement(EElements _keyElement)
 void ATDGameMode::StartPlay()
 {
     Super::StartPlay();
+
+     objectPoolerRef = ATDObjectPooler::TDGetObjectPooler(objectPoolerClass);
+     UTDGameData::TDSetObjectPooler(objectPoolerRef);
 
 }
 

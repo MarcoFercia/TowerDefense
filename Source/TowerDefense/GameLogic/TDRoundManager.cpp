@@ -32,13 +32,14 @@ void ATDRoundManager::BeginPlay()
 
 void ATDRoundManager::TDStartBuyPhase()
 {
-    timeRound = 0.f;
     actualPhase = GamePhase::BuyPhase;
+    timeRound = timeBuyPhase;
     FOnBuyPhaseStartDelegate.Broadcast(actualRound);
 }
 
 void ATDRoundManager::TDStartCombatPhase()
 {
+    actualPhase = GamePhase::CombatPhase;
     TDStartRound();
     FOnCombatPhaseStartDelegate.Broadcast(actualRound);
 }
@@ -46,7 +47,6 @@ void ATDRoundManager::TDStartCombatPhase()
 void ATDRoundManager::TDStartRound()
 {
 
-    actualPhase = GamePhase::CombatPhase;
     ++actualRound;
     isSawning = true;
     timeRound = timeperSpawn;
